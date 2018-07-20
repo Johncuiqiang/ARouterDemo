@@ -1,0 +1,14 @@
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle/
+build/
+
+# Android Studio files
+.idea/
+*.iml
+
+# Mac OS
+.DS_Store

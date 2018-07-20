@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="arouter.cuiqiang.com.userlib" >
+    <application>
+       <activity android:name=".UserActivity"></activity>
+    </application>
+</manifest>

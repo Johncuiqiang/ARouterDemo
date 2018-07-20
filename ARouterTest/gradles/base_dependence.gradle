@@ -1,0 +1,32 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+ext {
+    //版本号
+    versions = [
+            // compile
+            'appcompatV7'       : "25.2.0",
+            'constraintLayout'  : "1.1.2",
+            'arouterApi'        : "1.2.1.1",
+            'arouterCompiler'   : "1.1.4",
+            'junit'             : "4.12",
+            'runner'            : "1.0.2",
+            'espressoCore'      : "3.0.2",
+    ]
+    //依赖库
+    deps = [
+         'support': [
+                 'appcompatV7'       : "com.android.support:appcompat-v7:${versions.appcompatV7}",
+                 'constraintLayout'  : "com.android.support.constraint:" +
+                                       "constraint-layout:${versions.constraintLayout}",
+         ],
+         'lib': [
+                 'arouterApi'        : "com.alibaba:arouter-api:${versions.arouterApi}",
+                 'arouterCompiler'   : "com.alibaba:arouter-compiler:${versions.arouterCompiler}"
+         ],
+         'test': [
+                 'junit'        : "junit:junit:${versions.junit}",
+                 'runner'       : "com.android.support.test:runner:${versions.runner}",
+                 'espressoCore' : "com.android.support.test.espresso:espresso-core:${versions.espressoCore}",
+         ]
+    ]
+}
