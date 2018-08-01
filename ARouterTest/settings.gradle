@@ -1,4 +1,7 @@
-include ':app', ':ApplicationConfigLib', ':LogPrinter', ':FaceLib',
+include ':app',
+        ':ApplicationConfigLib',
+        ':LogPrinter',
+        ':FaceLib',
         ':UserModule',
         ':BaseLib',
         ':DualCacheKit',
