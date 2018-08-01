@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: '../gradles/base_build.gradle'
+apply from: '../gradles/base_dependencies.gradle'
 
 android {
 
@@ -21,6 +22,13 @@ android {
 }
 
 dependencies {
-    compile project(':UserLib')
-
+    implementation project(':UserModule')
+    implementation project(':DownloadFileKit')
+    implementation project(':ApplicationConfigLib')
+    implementation deps.lib.butterknife
+    annotationProcessor deps.lib.butterknifeApt
+    implementation (deps.lib.permissionsDispatcher){
+        exclude module: "support-v13"
+    }
+    annotationProcessor deps.lib.permissionProcessor
 }

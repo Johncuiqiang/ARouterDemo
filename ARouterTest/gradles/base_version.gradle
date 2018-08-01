@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+ext {
+    //版本号
+    versions = [
+            // compile
+            'supportLib'            : "27.1.1",
+            'constraintLayout'      : "1.1.2",
+            'arouterApi'            : "1.2.1.1",
+            'arouterCompiler'       : "1.1.4",
+            'junit'                 : "4.12",
+            'runner'                : "1.0.2",
+            'espressoCore'          : "3.0.2",
+            'gson'                  : "2.8.1",
+            'diskLruVersion'        : "2.0.2",
+            'butterknife'           : "8.1.0",
+            'permissionsDispatcher' : "4.0.0-SNAPSHOT",
+    ]
+    //依赖库
+    deps = [
+         'support': [
+                 'appcompatV7'       : "com.android.support:appcompat-v7:${versions.supportLib}",
+                 'constraintLayout'  : "com.android.support.constraint:" +
+                                       "constraint-layout:${versions.constraintLayout}",
+                 'recyclerview'      : "com.android.support:recyclerview-v7:${versions.supportLib}",
+         ],
+         'lib': [
+                 'arouterApi'           : "com.alibaba:arouter-api:${versions.arouterApi}",
+                 'arouterCompiler'      : "com.alibaba:arouter-compiler:${versions.arouterCompiler}",
+                 'gson'                 : "com.google.code.gson:gson:${versions.gson}",
+                 'diskLruVersion'       : "com.jakewharton:disklrucache:${versions.diskLruVersion}",
+                 'butterknife'          : "com.jakewharton:butterknife:${versions.butterknife}",
+                 'butterknifeApt'       : "com.jakewharton:butterknife-compiler:${versions.butterknife}",
+                 'permissionsDispatcher': "com.github.hotchemi:permissionsdispatcher:" +
+                                          "${versions.permissionsDispatcher}",
+                 'permissionProcessor'  : "com.github.hotchemi:permissionsdispatcher-processor" +
+                                          ":${versions.permissionsDispatcher}",
+         ],
+         'test': [
+                 'junit'             : "junit:junit:${versions.junit}",
+                 'runner'            : "com.android.support.test:runner:${versions.runner}",
+                 'espressoCore'      : "com.android.support.test.espresso:espresso-core:${versions.espressoCore}",
+         ],
+    ]
+}

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ARouterTest</string>
+
+    <!--下载相关-->
+    <string name="download_file_name">豌豆荚.apk</string>
+
 </resources>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="numberPickerStyle" format="reference" />
+
+    <declare-styleable name="NumberPicker">
+
+        <!-- @hide Color for the solid color background if such for optimized rendering. -->
+        <attr name="solidColor" format="color|reference" />
+        <!-- @hide The divider for making the selection area. -->
+        <attr name="selectionDivider" format="reference" />
+        <!-- @hide The height of the selection divider. -->
+        <attr name="selectionDividerHeight" format="dimension" />
+        <!-- @hide The distance between the two selection dividers. -->
+        <attr name="selectionDividersDistance" format="dimension" />
+        <!-- @hide The min height of the NumberPicker. -->
+        <attr name="internalMinHeight" format="dimension" />
+        <!-- @hide The max height of the NumberPicker. -->
+        <attr name="internalMaxHeight" format="dimension" />
+        <!-- @hide The min width of the NumberPicker. -->
+        <attr name="internalMinWidth" format="dimension" />
+        <!-- @hide The max width of the NumberPicker. -->
+        <attr name="internalMaxWidth" format="dimension" />
+        <!-- @hide The layout of the number picker. -->
+        <attr name="internalLayout" format="reference" />
+        <!-- @hide The drawable for pressed virtual (increment/decrement) buttons. -->
+        <attr name="virtualButtonPressedDrawable" format="reference" />
+        <attr name="internalTextColor" format="color|reference" />
+        <attr name="internalMaxTextSize" format="dimension" />
+        <attr name="internalMinTextSize" format="dimension" />
+        <attr name="displayItemNumber" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="ProgressView">
+        <attr name="progress_name" >
+            <enum name="health_time" value="0"/>
+            <enum name="health_step" value="1"/>
+            <enum name="health_count" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="BatteryIconView">
+        <attr name="battery_border_width" format="dimension" />
+        <attr name="battery_padding" format="dimension" />
+        <attr name="battery_border_color" format="reference|color" />
+        <attr name="battery_color" format="reference|color" />
+        <attr name="low_battery_color" format="reference|color" />
+        <attr name="low_battery_value" format="integer" />
+        <attr name="battery_orientation">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

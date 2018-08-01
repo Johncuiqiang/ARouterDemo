@@ -1,0 +1,17 @@
+apply plugin: 'com.android.library'
+apply from: '../gradles/base_build.gradle'
+
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+    }
+
+}
+
+dependencies {
+
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 加载背景颜色 -->
+    <color name="loading_bg">#1AF28F</color>
+    <!-- 加载颜色 -->
+    <color name="loading_front">#3293FE</color>
+    <!-- 全局背景颜色 -->
+    <color name="window_bg">#f4f4f4</color>
+    <!-- 提示类文字颜色 -->
+    <color name="secondary_text">#b2333333</color>
+    <!-- tic color indigo -->
+    <color name="basic_color_accent">#5e83e1</color>
+    <!-- tic color indigo darken -->
+    <color name="basic_color_accent_darken">#3c5db3</color>
+    <!-- 标题类主要文字颜色 -->
+    <color name="primary_text">#333333</color>
+</resources>
