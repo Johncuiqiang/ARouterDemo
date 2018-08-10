@@ -1,6 +1,5 @@
 package arouter.cuiqiang.com.aroutertest;
 
-import android.Manifest;
 import android.os.Message;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,15 +12,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.RuntimePermissions;
-
+import static arouter.cuiqiang.com.applicationconfiglib.constant.ARouterConstant.ANIM_ACTIVITY;
+import static arouter.cuiqiang.com.applicationconfiglib.constant.ARouterConstant.GLITCH_ACTIVITY;
 import static arouter.cuiqiang.com.applicationconfiglib.constant.ApplicationCodeConstant.DOWN_DONE;
 import static arouter.cuiqiang.com.applicationconfiglib.constant.ApplicationCodeConstant.DOWN_LOADING;
 
-@RuntimePermissions
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
@@ -38,6 +33,10 @@ public class MainActivity extends BaseActivity {
     Button mBtnPause;
     @BindView(R.id.btn_test)
     Button mBtnTest;
+    @BindView(R.id.btn_partcle)
+    Button mBtnFace;
+    @BindView(R.id.btn_flower)
+    Button mBtnFlower;
 
     private Unbinder mBinder;
     private MainPresenter mMainPresenter;
@@ -59,7 +58,6 @@ public class MainActivity extends BaseActivity {
     /**
      * 请求下载相关的权限
      */
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     void requestDownloadPermission() {
         //检查是否获取该权限
         mMainPresenter.initDownload(mDefaultHandler);
@@ -68,7 +66,6 @@ public class MainActivity extends BaseActivity {
     /**
      * 请求读取手机状态相关的权限
      */
-    @NeedsPermission(Manifest.permission.READ_PHONE_STATE)
     void requestPhonePermission() {
         Log.d("MainActivity", "READ_PHONE_STATE");
     }
@@ -101,7 +98,6 @@ public class MainActivity extends BaseActivity {
      * 下载
      */
     @OnClick(R.id.btn_download)
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
     void download(View view) {
         mMainPresenter.download();
         LogPrinter.info("download");
@@ -119,7 +115,17 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.btn_test)
     void test(View view) {
-     
+
+    }
+
+    @OnClick(R.id.btn_partcle)
+    void turnPartcleActivity(View view) {
+        mMainPresenter.turnActivity(ANIM_ACTIVITY);
+    }
+
+    @OnClick(R.id.btn_flower)
+    void turnFlowerActivty(View view){
+        mMainPresenter.turnActivity(GLITCH_ACTIVITY);
     }
 
     @Override
@@ -134,22 +140,6 @@ public class MainActivity extends BaseActivity {
             default:
                 break;
         }
-    }
-
-    /**
-     * 用户拒绝授权回调（可选）
-     */
-    @OnPermissionDenied({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    void setDownloadUnAvailable() {
-        mMainPresenter.setDownloadAvailable(false);
-    }
-
-    /**
-     * 用户勾选了“不再提醒”时调用（可选）
-     */
-    @OnNeverAskAgain({Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE})
-    void setDownloadNeverAvailable() {
-        mMainPresenter.setDownloadAvailable(false);
     }
 
     @Override

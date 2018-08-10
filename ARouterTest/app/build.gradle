@@ -24,11 +24,6 @@ android {
 dependencies {
     implementation project(':UserModule')
     implementation project(':DownloadFileKit')
-    implementation project(':ApplicationConfigLib')
     implementation deps.lib.butterknife
     annotationProcessor deps.lib.butterknifeApt
-    implementation (deps.lib.permissionsDispatcher){
-        exclude module: "support-v13"
-    }
-    annotationProcessor deps.lib.permissionProcessor
 }

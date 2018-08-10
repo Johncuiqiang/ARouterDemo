@@ -31,6 +31,11 @@ public interface IMainPresenter {
     void turnUserActivity();
 
     /**
+     * 跳转界面
+     */
+    void turnActivity(String path);
+
+    /**
      * 下载
      */
     void download();

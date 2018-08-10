@@ -47,5 +47,19 @@
         android:text= "测试"
         android:layout_below="@+id/btn_pause"
         />
+    <Button
+        android:id="@+id/btn_partcle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "跳转粒子特效"
+        android:layout_below="@+id/btn_test"
+        />
+    <Button
+        android:id="@+id/btn_flower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text= "跳转故障风格特效"
+        android:layout_below="@+id/btn_partcle"
+        />
 
 </RelativeLayout>

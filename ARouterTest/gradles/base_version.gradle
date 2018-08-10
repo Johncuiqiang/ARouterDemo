@@ -15,6 +15,8 @@ ext {
             'diskLruVersion'        : "2.0.2",
             'butterknife'           : "8.1.0",
             'permissionsDispatcher' : "4.0.0-SNAPSHOT",
+            'okhttp3'               : "3.6.0",
+            'multidex'              : "1.0.0",
     ]
     //依赖库
     deps = [
@@ -23,6 +25,7 @@ ext {
                  'constraintLayout'  : "com.android.support.constraint:" +
                                        "constraint-layout:${versions.constraintLayout}",
                  'recyclerview'      : "com.android.support:recyclerview-v7:${versions.supportLib}",
+                 'multidex'          : "com.android.support:multidex:${versions.multidex}",
          ],
          'lib': [
                  'arouterApi'           : "com.alibaba:arouter-api:${versions.arouterApi}",
@@ -31,10 +34,7 @@ ext {
                  'diskLruVersion'       : "com.jakewharton:disklrucache:${versions.diskLruVersion}",
                  'butterknife'          : "com.jakewharton:butterknife:${versions.butterknife}",
                  'butterknifeApt'       : "com.jakewharton:butterknife-compiler:${versions.butterknife}",
-                 'permissionsDispatcher': "com.github.hotchemi:permissionsdispatcher:" +
-                                          "${versions.permissionsDispatcher}",
-                 'permissionProcessor'  : "com.github.hotchemi:permissionsdispatcher-processor" +
-                                          ":${versions.permissionsDispatcher}",
+                 'okhttp3'              : "com.squareup.okhttp3:okhttp:${versions.okhttp3}"
          ],
          'test': [
                  'junit'             : "junit:junit:${versions.junit}",

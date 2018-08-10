@@ -14,5 +14,6 @@ android {
 
 dependencies {
     implementation deps.support.recyclerview
+    implementation deps.lib.okhttp3
     implementation files('libs/sunjce_provider.jar')
 }

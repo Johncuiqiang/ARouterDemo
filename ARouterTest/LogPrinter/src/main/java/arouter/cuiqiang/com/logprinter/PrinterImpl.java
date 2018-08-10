@@ -22,6 +22,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+
 import static arouter.cuiqiang.com.logprinter.LogConstants.BOTTOM_BORDER;
 import static arouter.cuiqiang.com.logprinter.LogConstants.CHUNK_SIZE;
 import static arouter.cuiqiang.com.logprinter.LogConstants.DEFAULT_TAG;
@@ -154,12 +155,11 @@ public class PrinterImpl implements Printer {
 
     @Override
     public synchronized void log(int priority, String tag, String msg, Throwable throwable) {
-
-        if (!mSettings.isShowLog()){
+        if (!mSettings.isShowLog()) {
             return;
         }
 
-        if (mSettings.isSimpleLogStyle()){
+        if (mSettings.isSimpleLogStyle()) {
             logChunk(priority, tag, msg);
             return;
         }
@@ -232,13 +232,13 @@ public class PrinterImpl implements Printer {
 
     @SuppressWarnings("StringBufferReplaceableByString")
     private void logHeaderContent(int logType, String tag, int methodCount) {
+
         StackTraceElement[] trace = new Throwable().getStackTrace();//Thread.currentThread().getStackTrace();
         if (mSettings.isShowThread()) {
             logChunk(logType, tag, HORIZONTAL_DOUBLE_LINE + " Thread: " + Thread.currentThread().getName());
             logDivider(logType, tag);
         }
         String level = "";
-
         int stackOffset = getStackOffset(trace);
 
         //corresponding method count with the current stack may exceeds the stack trace. Trims the count
@@ -288,6 +288,7 @@ public class PrinterImpl implements Printer {
                 break;
             case DEBUG:
                 // Fall through, log debug by default
+                Log.d(finalTag, chunk);
             default:
                 Log.d(finalTag, chunk);
                 break;

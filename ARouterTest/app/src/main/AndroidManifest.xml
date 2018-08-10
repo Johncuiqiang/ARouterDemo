@@ -21,6 +21,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.TestActivity"></activity>
+        <activity android:name=".ui.PartcleActivity"></activity>
+        <activity android:name=".ui.GlitchActivity"></activity>
+        <activity android:name=".ui.AndroidGL2Activity"></activity>
         <service android:name="arouter.cuiqiang.com.downloadfilekit.download.service.DownloadService"></service>
     </application>
 

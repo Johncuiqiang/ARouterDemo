@@ -1,0 +1,140 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+android {
+
+    //关闭Android Studio的PNG合法性检查的
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    // 指定资源的路径。比如从Eclipse迁过来的代码，和AS的文件位置不同，就需要手动设置
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'     //指定AndroidManifest文件
+            java.srcDirs = ['src']     //指定source目录
+            resources.srcDirs = ['src']     //指定source目录
+            aidl.srcDirs = ['src']     //指定source目录
+            renderscript.srcDirs = ['src']     //指定source目录
+            res.srcDirs = ['res']     //指定资源目录
+            assets.srcDirs = ['assets']     //指定assets目录
+            jniLibs.srcDirs = ['libs']     //指定lib库目录
+        }
+        debug.setRoot('build-types/debug')     //指定debug模式的路径
+        release.setRoot('build-types/release')     //指定release模式的路径
+    }
+
+    // build类型
+    buildTypes {
+        debug {
+            applicationIdSuffix ".debug"     //将包名设置为.debug，以便同时安装debug和release版本。
+            signingConfig signingConfigs.release     //设置上面signingConfigs的签名配置，在sign.gradle中
+        }
+        release {
+            minifyEnabled false     // 是否进行混淆
+            zipAlignEnabled true     //是否支持zip
+            shrinkResources true     // 移除无用的resource文件
+            debuggable false     //是否支持调试
+            signingConfig signingConfigs.debug     //设置签名信息
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'     // 设置混淆文件的位置。扩展见<补充2>
+        }
+    }
+
+    // 打包时的相关配置。当项目中依赖的第三方库越来越多时，有可能会出现两个依赖库中存在同一个（名称）文件。
+    // 如果这样，Gradle在打包时就会提示错误（警告）。那么就可以根据提示，然后使用以下方法将重复的文件剔除。
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+
+    // 程序在编译的时候会检查lint，有任何错误提示会停止build，我们可以关闭这个开关
+    lintOptions {
+        abortOnError false     // 有错误是否停止build
+        checkReleaseBuilds false     //打包release版本的时候是否进行检测
+        textReport true          //生成txt报告
+        textOutput 'stdout'      // 重定向输出；可以是文件或'stdout'
+        disable 'InvalidPackage'
+        error 'Recycle','Wakelock','DrawAllocation'
+        disable 'GradleDependency','OldTargetApi'
+        disable 'GoogleAppIndexingWarning'
+        disable 'IconMissingDensityFolder','IconDensities'
+        disable 'SmallSp','RtlHardcoded','RtlSymmetry','RelativeOverlap','UseCompoundDrawables'
+        disable 'ContentDescription','ClickableViewAccessibility'
+        disable 'InvalidPackage'
+    }
+
+    // multiDex的一些相关配置，这样配置可以让你的编译速度更快
+    dexOptions {
+        preDexLibraries = false
+        incremental true     // 让它不要对Lib做preDexing
+        // 开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。
+        javaMaxHeapSize "4g"     // 设置java堆内存大小
+    }
+
+    // 设置产品特性，即多渠道打包的东西，比如不同的应用名，图标、AndroidManifest.xml
+    // 配合manifest merger使用的时候就可以达成在一次编译过程中产生多个具有自己特性配置的版本。
+    productFlavors {
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]     // 渠道包配置
+            manifest.srcFile 'exampleapk/AndroidManifest1.xml'
+            applicationId "com.abc.def.xiaomi"
+        }
+        googlePlay {
+            applicationId "com.abc.def.googleplay"
+        }
+    }
+
+    // productFlavors的批量方法，类似一个循序遍历作用。
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+
+    // 运行gradle clean时，执行此处定义的task。
+    // 该任务继承自Delete，删除根目录中的build目录。
+    // 相当于执行Delete.delete(rootProject.buildDir)。
+    // gradle使用groovy语言，调用method时可以不用加（）。
+    task clean(type: Delete) {
+        delete rootProject.buildDir
+    }
+    //使用exclude，排除冲突的依赖包
+    compile ('com.bat:apploginsdk:1.0.1') {
+        // exclude module : 'okhttp'
+        // exclude module : 'com.android.support'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {}
+            }
+        }
+    }
+
+    allprojects {
+        configurations.all {
+            resolutionStrategy {
+                eachDependency { details ->
+                    if (details.requested.group == 'com.android.support') {
+                        if (details.requested.name == 'multidex'
+                                || details.requested.name == 'multidex-instrumentation') {
+                            details.useVersion versions.multidexLib
+                        } else {
+                            details.useVersion versions.supportLib
+                        }
+                    } else if (details.requested.group == 'android.arch.core') {
+                        details.useVersion versions.lifecycle
+                    } else if (details.requested.group == 'android.arch.lifecycle') {
+                        details.useVersion versions.lifecycle
+                    } else if (details.requested.group == 'android.arch.persistence.room') {
+                        details.useVersion versions.room
+                    }
+                }
+            }
+        }
+    }
+
+}
