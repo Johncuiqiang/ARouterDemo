@@ -34,7 +34,7 @@ dependencies {
 //    }
     implementation deps.support.appcompatV7
     implementation deps.support.constraintLayout
-    implementation deps.lib.arouterApi
+    compile deps.lib.arouterApi
     implementation deps.lib.gson
     annotationProcessor deps.lib.arouterCompiler
     testImplementation deps.test.junit

@@ -31,8 +31,8 @@ public class BaseModel<T extends BaseEntity> implements IModel {
     protected Request.Builder mRequestBuilder;
     protected Request mRequest = null;
     protected IResponseCallback mIResponseCallback;
-    protected Map<String, String> mParams = new HashMap();
-    protected Map<String, String> mHeaders = new HashMap();
+    protected Map<String, String> mParams = new HashMap<>();
+    protected Map<String, String> mHeaders = new HashMap<>();
     protected Class<T> mResponseEntity = null;
     protected Gson mGson = OkHttpHelper.getInstance().getGson();
     protected OkHttpClient mOkHttpClient = OkHttpHelper.getInstance().getOkHttpClient();

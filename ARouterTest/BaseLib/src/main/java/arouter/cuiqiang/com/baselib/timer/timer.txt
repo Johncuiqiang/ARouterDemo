@@ -1,0 +1,24 @@
+1.timer的缺陷,timer有且只有一个线程,所以多个task,一个timer的情况下,会依次执行,不能并发与预期结果不符合
+2.一个task抛出异常，timer会停止所有任务的执行
+3.timerdescheduleAtFixedRate会把已经过去的时间也作为周期执行，而schedule不会把过去的时间算上。
+  比如你用scheduleAtFixedRate设置的时间在7点，但是8点才运行程序，那么scheduleAtFixedRate会打印很多次
+4.final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        TimerTask timerTask1 = new TimerTask() {
+            @Override
+            public void run() {
+                LogPrinter.info("timerTask1" + simpleDateFormat.format(new Date()));
+            }
+        };
+        TimerTask timerTask2 = new TimerTask() {
+            @Override
+            public void run() {
+                LogPrinter.info("timerTask2" + simpleDateFormat.format(new Date()));
+            }
+        };
+        ScheduledExecutorService pool = Executors.newScheduledThreadPool(1);
+        pool.schedule(timerTask1,1000,TimeUnit.MILLISECONDS);//延迟1s执行
+        pool.scheduleAtFixedRate(timerTask2,1000,1000,TimeUnit.MILLISECONDS);//延迟1s每隔1s执行
+5.ScheduledExecutorService中的schedule与scheduleAtFixedRate没有明显区别，只是执行的参数不一样
+6.scheduleWithFixedDelay(commod,initialDelay,delay,unit)
+  initialDelay是系统启动多长时间后才开始运行
+  这个方式必须等待上一个任务结束才开始计时period。

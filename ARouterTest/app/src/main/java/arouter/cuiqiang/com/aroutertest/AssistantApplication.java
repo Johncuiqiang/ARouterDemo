@@ -19,8 +19,10 @@ public class AssistantApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LingContext.init(this);
-        ARouter.openLog();
-        ARouter.openDebug();
+        if (BuildConfig.DEBUG){
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
         ARouter.init(this);
         LogPrinter.init(TAG).setIsShowLog(true)
                             .setIsShowMethodName(true)

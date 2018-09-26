@@ -52,19 +52,22 @@ public class TaskPoolManager {
             synchronized (TaskPoolManager.class) {
                 if (null == INSTANCE) {
                     INSTANCE = new TaskPoolManager();
-                    sMAIN_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE,
-                            MAX_POOL_SIZE, KEEP_ALIVE_TIME,
-                            TimeUnit.MILLISECONDS, sBLOCKING_QUEUE,
-                            sREJECTED_EXECUTION_HANDLER);
-                    sAUXILIARY_EXECUTOR = new ThreadPoolExecutor(0,
-                            Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-                            new SynchronousQueue());
+
                 }
             }
         }
         return INSTANCE;
     }
 
+    private TaskPoolManager(){
+        sMAIN_EXECUTOR = new ThreadPoolExecutor(CORE_POOL_SIZE,
+                MAX_POOL_SIZE, KEEP_ALIVE_TIME,
+                TimeUnit.MILLISECONDS, sBLOCKING_QUEUE,
+                sREJECTED_EXECUTION_HANDLER);
+        sAUXILIARY_EXECUTOR = new ThreadPoolExecutor(0,
+                Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
+                new SynchronousQueue());
+    }
 
     public synchronized void addTask(BaseTask task) {
         if (task == null) {
